@@ -10,6 +10,13 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {UsersService} from "../pages/contact/contact.service";
+import {HttpModule} from "@angular/http";
+import {AngularFireModule} from "angularfire2/angularfire2";
+import {MessagesService} from "../pages/home/messages.service";
+import {environment} from "../environments/environment";
+import {AngularFireDatabase} from "angularfire2/database";
+
 
 @NgModule({
   declarations: [
@@ -21,7 +28,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -34,6 +43,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
+    UsersService,
+    MessagesService,
+    AngularFireDatabase,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

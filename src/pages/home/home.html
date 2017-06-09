@@ -5,13 +5,44 @@
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <ion-item-sliding *ngFor="let mess of messages, let i = index">
+    <ion-item>
+      <h2>{{mess.username}}</h2>
+      <p>{{mess.message}}</p>
+    </ion-item>
+    <ion-item-options side="left">
+      <button ion-button color="primary">
+        <ion-icon name="text"></ion-icon>
+        Text
+      </button>
+      <button ion-button color="secondary">
+        <ion-icon name="call"></ion-icon>
+        Call
+      </button>
+    </ion-item-options>
+    <ion-item-options side="right">
+      <button ion-button color="primary" (click)="borraUser(i)">
+        <ion-icon name="mail"></ion-icon>
+        Borrar
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+
+    <ion-item>
+      <ion-label floating>{{usernameLabel}}</ion-label>
+      <ion-input type="text" #user id="username" name="username" [(ngModel)]="username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>{{messageLabel}}</ion-label>
+      <ion-textarea [(ngModel)]="message"></ion-textarea>
+    </ion-item>
+
+    <button ion-button (click)="sendMessage()">Send</button>
+
+  </ion-toolbar>
+</ion-footer>
